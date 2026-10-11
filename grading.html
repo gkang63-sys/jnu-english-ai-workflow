@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과제 평가 워크플로</title>
+<meta name="description" content="JNUclass 과제 게시에서 AI 1차 채점, 다른 AI의 교차 검토, 코드 검증, 교수 확정까지 아홉 단계와 가상 피드백 예시.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html">교양영어 · AI 워크플로</a>
+  <nav class="tabs" aria-label="페이지">
+    <a href="index.html">처음</a>
+    <a href="deck.html">강의 덱</a>
+    <a href="grading.html" aria-current="page">과제 평가</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="kicker">워크플로 2 · Claude + JNUclass</p>
+    <h1>과제 평가 — 게시에서 확정까지</h1>
+    <p class="sub">AI가 1차로 채점하고, 다른 AI가 검토하고, 인용과 점수는 코드가 대조하고, 마지막 확정은 교수가 합니다. 2026-2학기 2–4주차 최종 피드백은 두 과목 합쳐 144건입니다.</p>
+  </section>
+
+  <div class="legend" role="group" aria-label="역할로 보기">
+    <span class="lab">역할로 보기</span>
+    <button class="chip all" type="button" data-role="all">전체</button>
+    <button class="chip ai" type="button" data-role="ai">AI</button>
+    <button class="chip code" type="button" data-role="code">코드</button>
+    <button class="chip prof" type="button" data-role="prof">교수</button>
+  </div>
+
+  <ol class="steps">
+    <li class="step" data-who="ai prof"><details open><summary>
+      <span class="num">01</span>
+      <span><span class="st-title">과제 설계</span><span class="st-one">덱의 과제 섹션이 먼저 학생에게 보인다</span></span>
+      <span class="who"><span class="ai">AI</span><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <p>요건의 숫자, 분량, 기한(금요일 23:59, 기한 뒤 미접수), 평가 기준 4항목을 덱 끝 과제 섹션에 둔다. 이후 모든 과제 파일은 이 섹션과 한 글자도 어긋나지 않게 쓴다.</p>
+      </div></details></li>
+
+    <li class="step" data-who="ai code"><details><summary>
+      <span class="num">02</span>
+      <span><span class="st-title">과제 본문과 해설</span><span class="st-one">내용 파일 하나에서 세 형식</span></span>
+      <span class="who"><span class="ai">AI</span><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <ul><li>JNUclass 과제 페이지용 영어 본문 — 「본문 복사」 단추가 달린 붙여넣기 도구.</li>
+            <li>영어 본문 + 한국어 해설 — HTML · docx · pdf. 문장을 고칠 때는 내용 파일 한 곳만 고친다.</li></ul>
+        <div class="files"><code>*_Assignment_JNUclass.html</code><code>*_Assignment_Guide.html · .docx · .pdf</code><code>guide_content.js</code></div>
+      </div></details></li>
+
+    <li class="step" data-who="prof code"><details><summary>
+      <span class="num">03</span>
+      <span><span class="st-title">게시</span><span class="st-one">학생에게 보이는 일은 설정을 확인한 뒤에</span></span>
+      <span class="who"><span class="prof">교수</span><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <ul><li>읽기(지난주 과제 설정, 주차 모듈 목록)는 확인 없이.</li>
+            <li>쓰기(과제 저장, 해설 파일 올리기, 모듈 항목 추가)는 제목·배점·기한·공개 시작을 교수에게 보이고 답을 받은 뒤.</li>
+            <li>통합 로그인은 교수가 직접. AI는 비밀번호를 입력하지 않는다.</li></ul>
+      </div></details></li>
+
+    <li class="step" data-who="code"><details><summary>
+      <span class="num">04</span>
+      <span><span class="st-title">제출물 수집</span><span class="st-one">확장자를 믿지 않고 파일 머리를 본다</span></span>
+      <span class="who"><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <p>JNUclass에서 내려받은 파일의 형식을 머리 바이트로 판별(한글 hwp · docx · pdf)하고 본문을 뽑는다. 학번은 파일 이름의 원래 이름이나 본문에서만 취하고, 없으면 「확인 필요」로 남긴다.</p>
+      </div></details></li>
+
+    <li class="step" data-who="ai"><details><summary>
+      <span class="num">05</span>
+      <span><span class="st-title">1차 채점과 피드백 초안</span><span class="st-one">근거는 학생 문장 그대로 인용</span></span>
+      <span class="who"><span class="ai">AI</span></span></summary>
+      <div class="st-body">
+        <ul><li>기본 루브릭: 영어 사용 4 · 초점과 구성 3 · 표현 2 · 완성도 1. 0.25 단위.</li>
+            <li>별도 감점은 소계와 따로: 파일 형식 −0.5 · 비채점 제출물(영상) 미제출 −0.5 · 만점 유보 −0.25.</li>
+            <li>같은 이유로 두 번 깎지 않는다. 과제 안내문에 없는 요건으로 감점하지 않는다.</li></ul>
+        <div class="rule">수정 대본은 학생 원문에 표시만 얹는다. 원문에 없는 사례·일화·이름을 지어내지 않고, 필요한 정보는 빈칸(______)으로 남겨 보완 과제로 돌린다.</div>
+      </div></details></li>
+
+    <li class="step" data-who="ai"><details><summary>
+      <span class="num">06</span>
+      <span><span class="st-title">교차 검토</span><span class="st-one">다른 AI가 1차 채점을 검토한다</span></span>
+      <span class="who"><span class="ai">AI</span></span></summary>
+      <div class="st-body">
+        <p>폴더에 남은 판본(폴더 이름 그대로)의 예:</p>
+        <div class="tablewrap"><table class="cmp">
+          <tr><th>과목 · 주차</th><th>판본</th><th>최종 피드백</th></tr>
+          <tr><td>영어읽기와 쓰기 1 · 2주차</td><td>Claude_1차평가 · GPT_1차평가_및_검토</td><td>31</td></tr>
+          <tr><td>영어읽기와 쓰기 1 · 4주차</td><td>Codex_1차평가_및_Claude검토 → 채점결과 → 최종평가</td><td>26</td></tr>
+          <tr><td>영어듣기와 말하기 1 · 4주차</td><td>Codex 1차채점 → 채점결과 → 최종결과 → 최종본_v2 → 확정본</td><td>18</td></tr>
+        </table></div>
+      </div></details></li>
+
+    <li class="step" data-who="code"><details><summary>
+      <span class="num">07</span>
+      <span><span class="st-title">코드 검증</span><span class="st-one">건너뛰지 않는 다섯 가지</span></span>
+      <span class="who"><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <ul><li>인용 대조 — 피드백의 모든 영어 인용을 원문에서 기계적으로 찾는다.</li>
+            <li>수정본 복원 — 표시를 걷어 내면 원문과 한 글자도 다르지 않아야 한다.</li>
+            <li>점수 정합 — 채점표 xlsx = 피드백 HTML = 성적 CSV.</li>
+            <li>만점 부재 — 어떤 파일에도 10.00이 없다.</li>
+            <li>문단 서식 — 문단은 들여쓰기로만, 빈 줄 없음.</li></ul>
+        <p class="note">아래 가상 예시에서 앞의 두 가지를 직접 눌러 볼 수 있습니다.</p>
+      </div></details></li>
+
+    <li class="step" data-who="prof"><details><summary>
+      <span class="num">08</span>
+      <span><span class="st-title">교수 확정</span><span class="st-one">한국어 일람에서 확인하고 바꾼 이유를 남긴다</span></span>
+      <span class="who"><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <p>교수용 일람(한국어)에는 반 전체 점수와 「무엇이 점수를 갈랐나」가 있다. 1차에서 바뀐 점수와 바뀌지 않은 점수 모두 이유를 적는다.</p>
+        <div class="files"><code>*_채점일람.html</code><code>*_채점표.xlsx (최종 평가 · 항목별 근거 · 1차→최종 변경 · 채점 기준)</code><code>변경기록.md</code></div>
+      </div></details></li>
+
+    <li class="step" data-who="prof"><details><summary>
+      <span class="num">09</span>
+      <span><span class="st-title">돌려주기</span><span class="st-one">학생별 피드백(영어, 1인 1파일) · 성적 업로드</span></span>
+      <span class="who"><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <p>피드백에는 다른 학생의 점수나 비교를 넣지 않는다. 성적은 학번·이름·점수 CSV로 올린다.</p>
+        <div class="files"><code>학생별_피드백/Feedback_*_WeekN.html</code><code>*_성적업로드.csv</code></div>
+      </div></details></li>
+  </ol>
+
+  <h2>가상 예시 — 피드백 한 건</h2>
+  <p class="note">아래 학생 글은 이 페이지를 위해 지어낸 것입니다. 실제 학생의 글이 아닙니다. 기준은 워크숍 실습용(내용 4 · 구성 3 · 표현 3)입니다.</p>
+
+  <div class="grid2">
+    <div>
+      <span class="tag-fic">가상 학생 글</span>
+      <div class="fb"><p id="orig">Psychology is the study of the mind and behavior. It is a subject that I want to study because I am interested in why people feel stress. Psychologists studies how people think, feel and act. For example, they research how sleep effect memory. I think psychology is useful for everyone. Because everyone have stress in their life.</p></div>
+    </div>
+    <div>
+      <span class="tag-fic">가상 피드백</span>
+      <div class="fb" id="fb">
+        <h4>Instructor Comment</h4>
+        <div class="badge">8.00 <small>/ 10</small></div>
+        <table>
+          <tr><td><b>Content</b> — A clear definition (<q>Psychology is the study of the mind and behavior</q>) and a personal reason. One example only; a second detail would make the subject clearer.</td><td class="pt">3.25 / 4</td></tr>
+          <tr><td><b>Organization</b> — Definition, reason, what psychologists do, example, opinion. The last sentence (<q>Because everyone have stress in their life.</q>) is a fragment that belongs to the sentence before it.</td><td class="pt">2.50 / 3</td></tr>
+          <tr><td><b>Language</b> — Three form errors: <q>Psychologists studies</q>, <q>sleep effect memory</q>, <q>everyone have</q>.</td><td class="pt">2.25 / 3</td></tr>
+        </table>
+        <h4>Revised Paragraph</h4>
+        <p id="rev">Psychology is the study of the mind and behavior. It is a subject that I want to study because I am interested in why people feel stress. Psychologists <del>studies</del><mark>study</mark> how people think, feel and act. For example, they research how sleep <del>effect</del><mark>affects</mark> memory. I think psychology is useful for everyone<del>. Because</del><mark> because</mark> everyone <del>have</del><mark>has</mark> stress in their life.<mark> In my own life, ______.</mark></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend" style="margin-top:14px">
+    <button class="chip" type="button" id="chkQuote">인용 대조 해 보기</button>
+    <button class="chip" type="button" id="chkRestore">수정본 복원 해 보기</button>
+  </div>
+  <p id="chkOut" class="note" aria-live="polite">버튼을 누르면 이 브라우저가 직접 대조합니다. 실제 채점에서는 같은 일을 스크립트가 합니다.</p>
+  <p class="note">빈칸 <b>In my own life, ______.</b>은 학생 글에 없는 내용을 지어내지 않고 학생에게 채우게 하는 자리입니다. 복원할 때는 표시(노랑)와 함께 걷어 냅니다.</p>
+</main>
+
+<footer><div class="wrap">
+  강계유 · 제주대학교 영어영문학과 · 규칙 출처: english-assignment · english-assignment-grading 스킬 문서 · <a href="deck.html">← 워크플로 1 · 강의 덱</a>
+  &nbsp;<button class="theme" type="button">밝게 / 어둡게</button>
+</div></footer>
+<script src="app.js"></script>
+<script>
+(function () {
+  var norm = function (s) { return s.replace(/[“”]/g, '"').replace(/[’]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase(); };
+  var orig = document.getElementById('orig').textContent, out = document.getElementById('chkOut');
+  document.getElementById('chkQuote').addEventListener('click', function () {
+    var qs = Array.prototype.slice.call(document.querySelectorAll('#fb q'));
+    var found = qs.filter(function (q) { return norm(orig).indexOf(norm(q.textContent)) > -1; });
+    out.textContent = '인용 ' + qs.length + '개 중 ' + found.length + '개가 학생 글에 그대로 있습니다.' + (found.length === qs.length ? ' 모두 일치.' : ' 없는 인용이 있습니다 — 고쳐야 합니다.');
+  });
+  document.getElementById('chkRestore').addEventListener('click', function () {
+    var c = document.getElementById('rev').cloneNode(true);
+    c.querySelectorAll('mark').forEach(function (m) { m.remove(); });
+    c.querySelectorAll('del').forEach(function (d) { d.replaceWith(document.createTextNode(d.textContent)); });
+    var same = norm(c.textContent) === norm(orig);
+    out.textContent = '표시를 걷어 낸 글이 학생 원문과 ' + (same ? '한 글자도 다르지 않습니다. 일치.' : '다릅니다 — 수정본이 원문을 바꿨습니다.');
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>강의 덱 워크플로</title>
+<meta name="description" content="교안·교재·지도서에서 낭독과 섹션 영상이 든 HTML 강의 덱을 만들어 JNUclass에 올리기까지 아홉 단계.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html">교양영어 · AI 워크플로</a>
+  <nav class="tabs" aria-label="페이지">
+    <a href="index.html">처음</a>
+    <a href="deck.html" aria-current="page">강의 덱</a>
+    <a href="grading.html">과제 평가</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="kicker">워크플로 1 · Claude + JNUclass</p>
+    <h1>강의 덱 — 교안에서 JNUclass까지</h1>
+    <p class="sub">결과물은 HTML 파일 하나입니다. 슬라이드, 슬라이드마다의 낭독, 섹션 요약 영상, 안에서 채점되는 연습 문제가 함께 들어 있습니다. 학생은 JNUclass에서 이 파일을 열어 공부합니다.</p>
+  </section>
+
+  <div class="legend" role="group" aria-label="역할로 보기">
+    <span class="lab">역할로 보기</span>
+    <button class="chip all" type="button" data-role="all">전체</button>
+    <button class="chip ai" type="button" data-role="ai">AI</button>
+    <button class="chip code" type="button" data-role="code">코드</button>
+    <button class="chip prof" type="button" data-role="prof">교수</button>
+  </div>
+  <p class="note">단계를 누르면 자세한 내용이 열립니다. 역할을 고르면 그 역할이 맡는 단계만 진하게 보입니다.</p>
+
+  <ol class="steps">
+    <li class="step" data-who="prof"><details open><summary>
+      <span class="num">01</span>
+      <span><span class="st-title">입력 모으기</span><span class="st-one">교안 · 교재 PDF · 교사용 지도서</span></span>
+      <span class="who"><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <ul><li>교안(docx): 지난해에 쓴 수업 순서와 문장 — 덱의 뼈대가 된다.</li>
+            <li>교재 PDF: 지면을 잘라 슬라이드에 넣는다. 글자 층이 없으면 그림으로 바꿔 눈으로 읽는다.</li>
+            <li>교사용 지도서: 정답과 듣기 대본은 여기서만 가져온다.</li></ul>
+        <div class="rule">원문이 없으면 지어내지 않는다. 자리표시자를 두고 교수에게 요청한다.</div>
+      </div></details></li>
+
+    <li class="step" data-who="prof"><details><summary>
+      <span class="num">02</span>
+      <span><span class="st-title">규칙 — 스킬 문서</span><span class="st-one">AI가 매번 먼저 읽는 규칙을 교수가 쓰고 고친다</span></span>
+      <span class="who"><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <ul><li>인용 원칙: 교재 본문·듣기 대본·정답은 사용자가 준 원문만 쓴다.</li>
+            <li>영어가 위, 한국어가 아래. 한국어는 번역이 아니라 해설.</li>
+            <li>한 장에 한 호흡. 섹션마다 교재 지면이 먼저, 해설은 그다음.</li>
+            <li>모든 슬라이드에 강의 노트(진행 지시 · 시간 · 학생이 틀리는 곳).</li>
+            <li>연습은 슬라이드 안에서 푼다 — 고르기 · 쓰기 · 짚기 · 나누기.</li></ul>
+        <div class="files"><code>english-lecture-deck/SKILL.md</code><code>references/deck-planning.md</code><code>references/bilingual-voice.md</code><code>references/slide-grammar.md</code></div>
+        <p class="note">학기 중에 고친다. 예: 2026-09-22 「덱 제목은 교재의 절 제목 그대로」, 09-23 「대본 인용에는 문장 단위 번역」.</p>
+      </div></details></li>
+
+    <li class="step" data-who="code"><details><summary>
+      <span class="num">03</span>
+      <span><span class="st-title">지면 자르기</span><span class="st-one">교재 PDF에서 상자·문항 영역만</span></span>
+      <span class="who"><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <p>좌표표에 따라 잘라 그림 데이터로 저장한다. 휴대폰으로 찍은 지면은 기울기를 바로잡아 넣는다.</p>
+        <div class="files"><code>crop_pages.py</code><code>fix_p90.py</code><code>pages_b64.json</code></div>
+      </div></details></li>
+
+    <li class="step" data-who="ai code"><details><summary>
+      <span class="num">04</span>
+      <span><span class="st-title">덱 조립</span><span class="st-one">슬라이드 한 장 = 함수 호출 한 번</span></span>
+      <span class="who"><span class="ai">AI</span><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <p>AI가 본문(영어 강의체 + 한국어 해설 + 노트)을 조립 스크립트로 쓰고, 라이브러리가 화면을 만든다. 고칠 때는 스크립트를 고치고 다시 조립한다.</p>
+        <div class="files"><code>build_4_1.py</code><code>deck_lib.py</code><code>deck_template_ELS1.html</code></div>
+        <p class="note">한 차시 기준 45–60장. 4주차 4-1은 51장, 4-2는 66장(영상 슬라이드 포함).</p>
+      </div></details></li>
+
+    <li class="step" data-who="code"><details><summary>
+      <span class="num">05</span>
+      <span><span class="st-title">소리 — 낭독과 듣기 트랙</span><span class="st-one">슬라이드마다 낭독 하나 · 듣기 트랙은 TTS 대체 음원</span></span>
+      <span class="who"><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <ul><li>L 키로 그 슬라이드의 영어 문장을 읽는다. 표지·섹션 표지·영상 슬라이드에는 없다. 정답은 상자를 연 뒤 이어 읽는다.</li>
+            <li>듣기 트랙은 교재 원음이 아니라 지도서 대본을 음성 합성으로 읽힌 것 — 화면에 「TTS 대체 음원」으로 밝힌다.</li></ul>
+        <div class="files"><code>narrate.py</code><code>make_audio.py</code><code>*_낭독대본.txt</code></div>
+        <p class="note">6주차 6-1(영어읽기와 쓰기 1): 낭독 58개, 24분 40초.</p>
+      </div></details></li>
+
+    <li class="step" data-who="ai code prof"><details><summary>
+      <span class="num">06</span>
+      <span><span class="st-title">섹션 요약 영상</span><span class="st-one">대본 → TTS → 덱 화면 + 영·한 자막 → mp4</span></span>
+      <span class="who"><span class="ai">AI</span><span class="code">코드</span><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <ul><li>3주차: 섹션 PDF를 제미나이 노트북에 넣어 만든 영상의 소리만 살려 덱 화면으로 다시 그렸다.</li>
+            <li>4주차부터: AI가 대본을 쓰고 교수가 검토 → 음성 합성 → 덱 화면을 찍어 자막과 함께 렌더.</li>
+            <li>자습 주간(6주차)에는 정답이 든 영상을 섹션 끝에 둔다. 개요 영상(정답 없음)만 표지 다음.</li></ul>
+        <div class="files"><code>vid/secvid.py</code><code>vid/v61_s00.py …</code><code>video/*.mp4 · *.srt</code></div>
+      </div></details></li>
+
+    <li class="step" data-who="code prof"><details><summary>
+      <span class="num">07</span>
+      <span><span class="st-title">검증</span><span class="st-one">눈으로 보지 않은 덱은 넘기지 않는다</span></span>
+      <span class="who"><span class="code">코드</span><span class="prof">교수</span></span></summary>
+      <div class="st-body">
+        <p>브라우저가 덱을 열어 직접 센다: 넘친 슬라이드, 노트 없는 슬라이드, 연습 문제 채점 동작, 낭독 이어 읽기, 인쇄 때 조작 단추 숨김, PDF 쪽수 = 슬라이드 수. 교수는 전체를 8장씩 묶은 화면으로 훑는다.</p>
+        <div class="files"><code>verify.py</code><code>shots/*_sheet*.png</code></div>
+        <p class="note">6주차 영어읽기와 쓰기 1: 넘침 0 · 노트 누락 0 · PDF 58쪽·53쪽 = 슬라이드 수.</p>
+      </div></details></li>
+
+    <li class="step" data-who="code"><details><summary>
+      <span class="num">08</span>
+      <span><span class="st-title">LMS판</span><span class="st-one">영상까지 파일 안에 넣은 HTML 하나</span></span>
+      <span class="who"><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <p>영상이 옆 폴더에 있으면 JNUclass에서 재생되지 않는다. 그래서 영상(540p)과 서체를 파일 안에 넣은 판을 따로 만든다. 학생 모드로 열리고(점수 표시, 노트 숨김), 교수 모드는 주소 뒤 <code>?teacher</code> 또는 S 키.</p>
+        <div class="files"><code>EMBED=1 STUDENT_DEFAULT=1</code><code>*_LMS.html</code></div>
+        <p class="note">6주차 영어듣기와 말하기 1 LMS판: 16.7 MB · 16.4 MB. 20 MB를 넘으면 전송이 막혔다.</p>
+      </div></details></li>
+
+    <li class="step" data-who="prof code"><details><summary>
+      <span class="num">09</span>
+      <span><span class="st-title">게시</span><span class="st-one">JNUclass 주차 모듈: 덱 → 과제 → 과제 해설</span></span>
+      <span class="who"><span class="prof">교수</span><span class="code">코드</span></span></summary>
+      <div class="st-body">
+        <p>교수가 직접 올리거나, AI가 Canvas API로 올린다. 학생에게 보이는 일은 교수가 설정을 확인한 뒤에만 하고, 로그인은 교수가 직접 한다.</p>
+        <div class="rule">기존 항목은 지우지 않는다. 비공개로 돌리고 알린다.</div>
+      </div></details></li>
+  </ol>
+
+  <h2>학생이 쓰는 키</h2>
+  <div class="tablewrap"><table class="cmp">
+    <tr><th>키</th><th>동작</th></tr>
+    <tr><td>← → Space</td><td>앞뒤 이동 · ▸ 표시가 있으면 → 가 먼저 정답을 연다</td></tr>
+    <tr><td>L</td><td>이 슬라이드 낭독</td></tr>
+    <tr><td>S</td><td>학생 모드 (점수 표시 · 노트 숨김)</td></tr>
+    <tr><td>N · F · P</td><td>강의 노트 · 전체 화면 · 인쇄(PDF)</td></tr>
+  </table></div>
+</main>
+
+<footer><div class="wrap">
+  강계유 · 제주대학교 영어영문학과 · 수치는 2026-2학기 두 과목 폴더에서 센 값 · <a href="grading.html">워크플로 2 · 과제 평가 →</a>
+  &nbsp;<button class="theme" type="button">밝게 / 어둡게</button>
+</div></footer>
+<script src="app.js"></script>
+</body>
+</html>
