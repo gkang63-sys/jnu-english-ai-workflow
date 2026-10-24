@@ -183,7 +183,7 @@
      ['JNUclass','J-N-U class'],['23:59','11:59 p.m.'],['T/F','true or false'],['…',' ... '],['Wh-','W-H'],['#','number ']].forEach(function(p){t=t.split(p[0]).join(p[1])});
     t=t.replace(/\bpp\.\s?(\d+)\s?[–-]\s?(\d+)/g,'pages $1 to $2').replace(/\bp\.\s?(\d+)/g,'page $1').replace(/(\d)\s?–\s?(\d)/g,'$1 to $2').replace(/–/g,', ').replace(/\bMIN\b/g,'minutes').replace(/\b0(\d)\b/g,'$1');
     if(!IPA.test(t)) t=t.replace(/\s*\/\s*/g,' or ');
-    t=sq(t).replace(/^[\s,.:;!?\-]+/,'').replace(/([?!])\s*[.,;:]+/g,'$1').replace(/([,.:;])\s*[,.:;]+/g,'$1').replace(/\s+([,.!?;:])/g,'$1');
+    t=sq(t).replace(/^(?:[\s,.:;!?]|-(?=\s))+/,'').replace(/([?!])\s*[.,;:]+/g,'$1').replace(/([,.:;])\s*[,.:;]+/g,'$1').replace(/\s+([,.!?;:])/g,'$1');
     return sq(t); }
   function sentences(t){ return t.split(/(?<=[.?!])\s+(?=[A-Z0-9"“‘(])/).map(sq).filter(Boolean) }
 
